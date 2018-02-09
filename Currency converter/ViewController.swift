@@ -25,6 +25,8 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     @IBOutlet weak var sideMenuLeadingConstraint: NSLayoutConstraint!
     var isMenuShowing = false
     
+    var currencyPair = [String]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -49,6 +51,9 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    // MARK: - side menu
+    
     @IBAction func openMenu(_ sender: Any) {
         if(!isMenuShowing){
             self.sideMenuLeadingConstraint.constant = 0
@@ -60,6 +65,13 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
             self.view.layoutIfNeeded()
         })
         isMenuShowing = !isMenuShowing
+    }
+    
+    @IBAction func saveCurrencyPair(_ sender: Any) {
+        let currencyFrom = self.currencies[pickerFrom.selectedRow(inComponent: 0)]
+        let currencyTo = self.currencies[pickerTo.selectedRow(inComponent: 0)]
+        let pair = currencyFrom + " -> " + currencyTo
+        self.currencyPair.append(pair)
     }
     
     // MARK: - UIPickerViewDataSource
@@ -85,9 +97,8 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-//        if pickerView === pickerTo {
-            self.pickerTo.reloadAllComponents()
-//        }
+        self.pickerTo.reloadAllComponents()
+        
         self.requestCurrentCurrencyRate()
     }
     
@@ -141,7 +152,6 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         do{
             let json = try JSONSerialization.jsonObject(with: data!, options: []) as? Dictionary<String, Any>
             if let parsedJson = json {
-                print("\(parsedJson)")
                 if let rates = parsedJson["rates"] as? Dictionary<String, Double>{
                     if let rate = rates[toCurrency] {
                         value = "\(rate)"
@@ -197,7 +207,6 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
                     codes = stringSelf.parseCurrencyCodesResponse(data: data)
                 }
             }
-            print(codes)
             completion(codes)
         }
     }
