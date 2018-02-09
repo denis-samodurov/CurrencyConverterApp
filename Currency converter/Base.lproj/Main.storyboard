@@ -13,47 +13,83 @@
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Currency_converter" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="toT-SN-ZSB">
-                                <rect key="frame" x="0.0" y="20" width="375" height="293"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="288.5"/>
                             </pickerView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="duQ-5Q-wel">
-                                <rect key="frame" x="10" y="323" width="355" height="21"/>
+                                <rect key="frame" x="10" y="318.5" width="355" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="R38-NZ-sbM"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Heg-Wn-Fg8">
-                                <rect key="frame" x="0.0" y="354" width="375" height="313"/>
+                                <rect key="frame" x="0.0" y="358.5" width="375" height="308.5"/>
                             </pickerView>
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="KDD-8I-0Oe">
                                 <rect key="frame" x="177" y="324" width="20" height="20"/>
                             </activityIndicatorView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Currency from" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VpK-iw-AQQ">
+                                <rect key="frame" x="10" y="30" width="355" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="FBv-55-Vcy"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Currency to" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b1Q-Fu-CvT">
+                                <rect key="frame" x="10" y="627" width="355" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="7eO-Kk-1xS"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gdX-OL-CQ9">
+                                <rect key="frame" x="315" y="607" width="40" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="AWW-ZZ-9xK"/>
+                                    <constraint firstAttribute="width" constant="40" id="BBs-iP-krV"/>
+                                </constraints>
+                                <state key="normal" backgroundImage="plus"/>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="gdX-OL-CQ9" secondAttribute="bottom" constant="20" id="1WN-Di-5p4"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="duQ-5Q-wel" secondAttribute="trailing" constant="10" id="1oN-kT-FDv"/>
                             <constraint firstItem="duQ-5Q-wel" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="65U-Ia-qze"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="VpK-iw-AQQ" secondAttribute="trailing" constant="10" id="90N-sy-VbS"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="Heg-Wn-Fg8" secondAttribute="bottom" id="9Pp-32-4dZ"/>
                             <constraint firstItem="duQ-5Q-wel" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="CI5-jm-29z"/>
                             <constraint firstItem="KDD-8I-0Oe" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="COH-n6-2uo"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="b1Q-Fu-CvT" secondAttribute="bottom" constant="10" id="HsE-Bx-M4z"/>
                             <constraint firstItem="toT-SN-ZSB" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Ngu-fF-D6b"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="toT-SN-ZSB" secondAttribute="trailing" id="ONI-eF-8Rw"/>
                             <constraint firstItem="duQ-5Q-wel" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="P11-3M-SaM"/>
                             <constraint firstItem="Heg-Wn-Fg8" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="PTr-SE-KiL"/>
                             <constraint firstItem="duQ-5Q-wel" firstAttribute="top" secondItem="toT-SN-ZSB" secondAttribute="bottom" constant="10" id="SeF-RE-E5r"/>
+                            <constraint firstItem="b1Q-Fu-CvT" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="10" id="YB1-2y-P6e"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="b1Q-Fu-CvT" secondAttribute="trailing" constant="10" id="Z0Y-Qw-eOM"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="gdX-OL-CQ9" secondAttribute="trailing" constant="20" id="b7v-tn-UNp"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Heg-Wn-Fg8" secondAttribute="trailing" id="fzs-Nj-uxX"/>
                             <constraint firstItem="toT-SN-ZSB" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="k4B-oL-7WQ"/>
+                            <constraint firstItem="VpK-iw-AQQ" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="10" id="lhX-yr-S3o"/>
                             <constraint firstItem="duQ-5Q-wel" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="10" id="nm4-GD-0Wx"/>
                             <constraint firstItem="Heg-Wn-Fg8" firstAttribute="top" secondItem="duQ-5Q-wel" secondAttribute="bottom" constant="10" id="osV-oX-Xdl"/>
                             <constraint firstItem="Heg-Wn-Fg8" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="q6F-tP-t6Y"/>
                             <constraint firstItem="toT-SN-ZSB" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="uRA-xs-ArV"/>
                             <constraint firstItem="KDD-8I-0Oe" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="xmu-zc-q6d"/>
+                            <constraint firstItem="VpK-iw-AQQ" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="10" id="zbA-oN-oaU"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
@@ -64,7 +100,11 @@
                         <outlet property="pickerTo" destination="Heg-Wn-Fg8" id="7BM-p0-DvB"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
         </scene>
     </scenes>
+    <resources>
+        <image name="plus" width="64" height="64"/>
+    </resources>
 </document>
