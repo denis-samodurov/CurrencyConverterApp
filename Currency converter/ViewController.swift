@@ -17,13 +17,21 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
 
-    static let defualtCodes = ["EUR", "RON", "MYR", "ISK", "CAD", "DKK", "GBP", "PHP", "CZK", "PLN", "RUB", "SGD",
-                               "BRL", "JPY", "SEK", "USD", "HRK", "NZD", "HKD", "BGN", "TRY", "MXN", "HUF", "KRW",
-                               "NOK", "INR", "ILS", "IDR", "CHF", "THB", "CNY", "ZAR", "AUD"]
+    static let defualtCodes = ["EUR", "RON", "MYR", "ISK", "CAD", "DKK", "GBP", "PHP", "CZK", "PLN", "RUB", "SGD", "BRL", "JPY", "SEK", "USD", "HRK", "NZD", "HKD", "BGN", "TRY", "MXN", "HUF", "KRW", "NOK", "INR", "ILS", "IDR", "CHF", "THB", "CNY", "ZAR", "AUD"]
     var currencies = defualtCodes
+    
+    @IBOutlet weak var sideMenuView: UIView!
+    @IBOutlet weak var sideMenuWidthConstraint: NSLayoutConstraint!
+    @IBOutlet weak var sideMenuLeadingConstraint: NSLayoutConstraint!
+    var isMenuShowing = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        sideMenuView.layer.shadowOpacity = 1
+        sideMenuView.layer.shadowOpacity = 0.2
+        sideMenuView.layer.shadowRadius = 6
+        
         self.label.text = "Тут будет курс"
         
         self.pickerFrom.dataSource = self
@@ -40,6 +48,18 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    @IBAction func openMenu(_ sender: Any) {
+        if(!isMenuShowing){
+            self.sideMenuLeadingConstraint.constant = 0
+
+        } else {
+            self.sideMenuLeadingConstraint.constant = -self.sideMenuWidthConstraint.constant
+        }
+        UIView.animate(withDuration: 0.3, animations: {
+            self.view.layoutIfNeeded()
+        })
+        isMenuShowing = !isMenuShowing
     }
     
     // MARK: - UIPickerViewDataSource
