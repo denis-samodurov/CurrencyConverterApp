@@ -9,9 +9,16 @@
 import UIKit
 
 class ViewController: UIViewController {
+    @IBOutlet weak var label: UILabel!
+    
+    @IBOutlet weak var pickerFrom: UIPickerView!
+    @IBOutlet weak var pickerTo: UIPickerView!
+    
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.label.text = "Тут будет курс"
         // Do any additional setup after loading the view, typically from a nib.
     }
 
