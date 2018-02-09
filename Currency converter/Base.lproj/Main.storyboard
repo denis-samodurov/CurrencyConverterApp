@@ -61,12 +61,25 @@
                                     <constraint firstAttribute="width" constant="40" id="BBs-iP-krV"/>
                                 </constraints>
                                 <state key="normal" backgroundImage="plus"/>
+                                <connections>
+                                    <action selector="saveCurrencyPair:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ez6-QW-136"/>
+                                </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pGj-5d-qeV">
                                 <rect key="frame" x="-150" y="64" width="150" height="603"/>
+                                <subviews>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="zaC-00-czF">
+                                        <rect key="frame" x="10" y="10" width="130" height="583"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </tableView>
+                                </subviews>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
+                                    <constraint firstItem="zaC-00-czF" firstAttribute="leading" secondItem="pGj-5d-qeV" secondAttribute="leading" constant="10" id="290-ZE-hhu"/>
+                                    <constraint firstAttribute="trailing" secondItem="zaC-00-czF" secondAttribute="trailing" constant="10" id="6fX-3S-H7d"/>
                                     <constraint firstAttribute="width" constant="150" id="N4K-nG-Drq"/>
+                                    <constraint firstItem="zaC-00-czF" firstAttribute="top" secondItem="pGj-5d-qeV" secondAttribute="top" constant="10" id="af4-Qx-Rtd"/>
+                                    <constraint firstAttribute="bottom" secondItem="zaC-00-czF" secondAttribute="bottom" constant="10" id="bDM-Mb-Ogw"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -110,9 +123,15 @@
                                 <action selector="openMenu:" destination="BYZ-38-t0r" id="Ssu-1p-JKv"/>
                             </connections>
                         </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="refresh" id="g3t-UR-aH1">
+                            <connections>
+                                <action selector="refreshData:" destination="BYZ-38-t0r" id="ep4-Xp-SEV"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="activityIndicator" destination="KDD-8I-0Oe" id="zj9-Iu-FS8"/>
+                        <outlet property="currencyPairTable" destination="zaC-00-czF" id="h0d-l2-VdE"/>
                         <outlet property="label" destination="duQ-5Q-wel" id="QKX-oj-62T"/>
                         <outlet property="pickerFrom" destination="toT-SN-ZSB" id="jJm-gP-BBW"/>
                         <outlet property="pickerTo" destination="Heg-Wn-Fg8" id="7BM-p0-DvB"/>

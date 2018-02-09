@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate{
+class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate, UITableViewDataSource, UITableViewDelegate{
     
     @IBOutlet weak var label: UILabel!
     
@@ -25,7 +25,9 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     @IBOutlet weak var sideMenuLeadingConstraint: NSLayoutConstraint!
     var isMenuShowing = false
     
+    let separatorPattern = " -> "
     var currencyPair = [String]()
+    @IBOutlet weak var currencyPairTable: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,6 +35,18 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         sideMenuView.layer.shadowOpacity = 1
         sideMenuView.layer.shadowOpacity = 0.2
         sideMenuView.layer.shadowRadius = 6
+        
+        let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(ViewController.changeMenuState(_:)))
+        swipeRight.direction = UISwipeGestureRecognizerDirection.right
+        self.view.addGestureRecognizer(swipeRight)
+        
+        let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(ViewController.changeMenuState(_:)))
+        swipeLeft.direction = UISwipeGestureRecognizerDirection.left
+        self.view.addGestureRecognizer(swipeLeft)
+        
+        self.currencyPairTable.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        self.currencyPairTable.dataSource = self
+        self.currencyPairTable.delegate = self
         
         self.label.text = "Тут будет курс"
         
@@ -54,7 +68,7 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     
     // MARK: - side menu
     
-    @IBAction func openMenu(_ sender: Any) {
+    @IBAction func changeMenuState(_ sender: Any) {
         if(!isMenuShowing){
             self.sideMenuLeadingConstraint.constant = 0
 
@@ -67,12 +81,20 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         isMenuShowing = !isMenuShowing
     }
     
+    // MARK: - Buttons' actions
+    
     @IBAction func saveCurrencyPair(_ sender: Any) {
         let currencyFrom = self.currencies[pickerFrom.selectedRow(inComponent: 0)]
-        let currencyTo = self.currencies[pickerTo.selectedRow(inComponent: 0)]
-        let pair = currencyFrom + " -> " + currencyTo
+        let currencyTo = self.currenciesExceptBase()[pickerTo.selectedRow(inComponent: 0)]
+        let pair = currencyFrom + self.separatorPattern + currencyTo
         self.currencyPair.append(pair)
+        self.currencyPairTable.reloadData()
     }
+    
+    @IBAction func refreshData(_ sender: Any) {
+        requestCurrentCurrencyCodes()
+    }
+    
     
     // MARK: - UIPickerViewDataSource
     
@@ -107,6 +129,35 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         currenciesExceptBase.remove(at: pickerFrom.selectedRow(inComponent: 0))
         
         return currenciesExceptBase
+    }
+    
+    // MARK: - UITableViewDelegate
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let currentCurrencyPairString = self.currencyPair[indexPath.row]
+        let currentCurrencyPairStringArray = currentCurrencyPairString.components(separatedBy: self.separatorPattern)
+        let currentFrom = currentCurrencyPairStringArray[0]
+        let currentTo = currentCurrencyPairStringArray[1]
+        
+        let currentFromIndex = currencies.index(of: currentFrom)
+        let currentToIndex = currenciesExceptBase().index(of: currentTo)
+        
+        self.pickerFrom.selectRow(currentFromIndex!, inComponent: 0, animated: true)
+        self.pickerTo.selectRow(currentToIndex!, inComponent: 0, animated: true)
+        
+        self.requestCurrentCurrencyRate()
+    }
+    
+    // MARK: - UITableViewDataSource
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return self.currencyPair.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as UITableViewCell
+        cell.textLabel?.text = currencyPair[indexPath.row]
+        
+        return cell
     }
     
     // MARK Networking
