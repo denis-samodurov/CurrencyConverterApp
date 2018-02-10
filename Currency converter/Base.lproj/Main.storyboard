@@ -115,7 +115,7 @@
                         <barButtonItem key="leftBarButtonItem" systemItem="bookmarks" id="W6V-8T-TzS">
                             <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             <connections>
-                                <action selector="openMenu:" destination="BYZ-38-t0r" id="Ssu-1p-JKv"/>
+                                <action selector="changeMenuState:" destination="BYZ-38-t0r" id="uGT-xM-7SF"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="refresh" id="g3t-UR-aH1">
